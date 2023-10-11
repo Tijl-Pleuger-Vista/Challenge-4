@@ -1,0 +1,6 @@
+Create readme with the MOSCOW rules
+Create a storyboard of the website that follow the rules set previously
+Create a technical design
+Create a functional design
+Create the website front end
+Create JS for GitHub API
