@@ -1,0 +1,92 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css");
+
+:root {
+  --sidebar: #010409 ;
+  --main: #0d1117 ;
+  --divider: #21262d ;
+  --text: white;
+  --sub-text: #8b949e;
+  --click-text: #58a6ff;
+  --button: #1f6feb;
+}
+body {
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+  background-color: var(--main);
+  color: var(--bs-body-color);
+  font-family: var(--bs-body-font-family);
+  font-size: var(--bs-body-font-size);
+  font-weight: var(--bs-body-font-weight);
+  line-height: var(--bs-body-line-height);
+  margin: 0;
+  text-align: var(--bs-body-text-align)
+}
+
+#main-main {
+  margin-top: 100px;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.sidebar {
+  background-color: var(--sidebar);
+  bottom: 0;
+  height: 100px;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  transition: top 0.5s ease-out;
+  width: 100%;
+  z-index: 10;
+  border-bottom: 1px solid var(--divider);
+}
+
+.max-content {
+  width: max-content;
+}
+
+.logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+@font-face {
+  font-family: Dimitra;
+  src: url(https://headbodyscript.github.io/assets/fonts/dimitra.woff2) format('woff2')
+}
+/* SPLASH*/
+.splash-intro{position:fixed;z-index:256;left:0;top:0;width:100%;height:100vh;background-color:#353535;transition:1s}.splash-logo-header{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;color:#fff;display:flex;flex-direction:row}@media screen and (max-width:900px){.splash-logo-header{flex-direction:column}}.splash-logo{position:relative;display:inline-block;bottom:-20px;opacity:0;font-family:Dimitra;margin-top:50px}.splash-logo.active{bottom:0;opacity:1;transition:.5s ease-in-out}.splash-logo.fade{bottom:150px;opacity:0;transition:.5s ease-in-out}
+
+a {
+  text-decoration: none;
+}
+.sidebar div a {
+  font-family: Dimitra;
+  font-size: xx-small;
+  color: var(--text);
+  text-shadow: 2px 2px --var(--divider);
+  height: 100px;
+  cursor: default;
+}
+
+a:link {
+  color: red;
+}
+
+/* visited link */
+a:visited {
+  color: green;
+}
+
+/* mouse over link */
+a:hover {
+  color: hotpink;
+}
+
+/* selected link */
+a:active {
+  color: blue;
+}
+
+/*# sourceMappingURL=/app.8afbe24a.css.map */
