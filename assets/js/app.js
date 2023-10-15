@@ -20,6 +20,7 @@
 //             fetch(`https://api.github.com/repos/${gitUser}/${resultCategories}/commits/main`)
 //                 .then(subCategories => subCategories.json())
 //                 .then(subCategories => {
+//                     console.log(subCategories)
 
 //                 var gitTime = subCategories.commit.author.date
 //                 var gitSummary = subCategories.commit.message
