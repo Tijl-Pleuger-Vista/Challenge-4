@@ -118,60 +118,45 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"assets/js/ign-app.js":[function(require,module,exports) {
-// let GetGitRepo = () => {
-//     var gitUser = "Tijl-Pleuger-Vista"
-//     var GitRepoLink = "/repos/HeadBodyScript/DATA-Armoury/commits"
-//     fetch(`https://api.github.com/users/${gitUser}/repos`)
-//     .then(Categories => Categories.json())
-//     .then(Categories => {
+var GetGitRepo = function GetGitRepo() {
+  var gitUser = "Tijl-Pleuger-Vista";
+  var GitRepoLink = "/repos/HeadBodyScript/DATA-Armoury/commits";
+  fetch("https://api.github.com/users/".concat(gitUser, "/repos")).then(function (Categories) {
+    return Categories.json();
+  }).then(function (Categories) {
+    console.log(Categories);
 
-//         var reducedCategories = Categories.reduce((prev, obj) => prev + `/${obj.name}`, '');
-//         localStorage.setItem('reducedList', reducedCategories);
+    // (dont) make this so there are arrays of the obj you need to use in the placeDiv function
 
-//             function placeDiv() {
-
-//             var _reducedCategories = localStorage.getItem('reducedList');
-//             var splitCategories = _reducedCategories.split("/");
-//             var resultCategories = splitCategories.pop();
-//             var newReducedCategories = splitCategories.join("/");
-//             localStorage.setItem('reducedList', newReducedCategories);
-//             console.log(_reducedCategories)
-
-//             fetch(`https://api.github.com/repos/${gitUser}/${resultCategories}/commits/main`)
-//                 .then(subCategories => subCategories.json())
-//                 .then(subCategories => {
-//                     console.log(subCategories)
-
-//                 var gitTime = subCategories.commit.author.date
-//                 var gitSummary = subCategories.commit.message
-//                 Form.innerHTML +=
-//                 `
-//                 <div class="col-6 col-lg-3 col-md-6">
-//                     <div class="card dimi">
-//                         <div class="card-body set-border px-4 py-4-5">
-//                             <div class="row">
-//                                 <div class="stats-icon2"><img src="https://raw.githubusercontent.com/HeadBodyScript/HeadBodyScript/main/user-interface/image-404.webp"></div>
-//                                 <div class="col-md-8 col-lg-12 col-xl-12 col-xxl-7">
-//                                     <h5>${resultCategories}<br></h5>
-//                                     <h6 class="text-muted font-semibold">${gitSummary}</h6>
-//                                     <h6 class="font-extrabold mb-0"><a href="">${gitTime}</a></h6>
-//                                 </div>
-//                             </div>
-//                         </div>
-//                     </div>
-//                 </div>
-//                 `
-//                 })
-//             }
-
-//         let result = 0;
-//         for (let i = 0; i < Categories.length; i++) {
-//         result += placeDiv();
-//         }
-//     })
-// };
-// GetGitRepo();
-
+    // make a for each loop of Categories to make var of data I need inside the function
+    // Categories 0, create own list at 0. At List[0] get data from Categories[0] and so on
+    var reducedCategories = Categories.reduce(function (prev, obj) {
+      return prev + "/".concat(obj.name);
+    }, '');
+    localStorage.setItem('reducedList', reducedCategories);
+    function placeDiv() {
+      var _reducedCategories = localStorage.getItem('reducedList');
+      var splitCategories = _reducedCategories.split("/");
+      var resultCategories = splitCategories.pop();
+      var newReducedCategories = splitCategories.join("/");
+      localStorage.setItem('reducedList', newReducedCategories);
+      console.log(_reducedCategories);
+      fetch("https://api.github.com/repos/".concat(gitUser, "/").concat(resultCategories, "/commits/main")).then(function (subCategories) {
+        return subCategories.json();
+      }).then(function (subCategories) {
+        console.log(subCategories);
+        var gitTime = subCategories.commit.author.date;
+        var gitSummary = subCategories.commit.message;
+        Form.innerHTML += "\n                <div class=\"card\">\n                    <div class=\"card-container\">\n                        <ul>\n                            <li class=\"card-header\"><strong>Project Name</strong><img class=\"icon\" src=\"icon.jpeg\" alt=\"\"></li>\n                            <li class=\"border\"><i class=\"bi bi-caret-right-fill\"></i>Description</li>\n                            <li class=\"border\"><i class=\"bi bi-caret-right-fill\"></i>ReadMe.MD</li>\n                            <li class=\"border\"><i class=\"bi bi-caret-down-fill\"></i>New Update</li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>Time: ".concat(gitTime, "</li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>New Update</li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>Message: ").concat(gitSummary, "</li>\n                            <li class=\"border card-footer\"><i class=\"bi bi-caret-right-fill\"></i><a href=\"\">Link To Website</a></li>\n                        </ul>\n                    </div>\n                </div>\n                ");
+      });
+    }
+    var result = 0;
+    for (var i = 0; i < Categories.length; i++) {
+      result += placeDiv();
+    }
+  });
+};
+GetGitRepo();
 var intro = document.querySelector('.splash-intro');
 var logo = document.querySelector('.splash-logo-header');
 var logoSpan = document.querySelectorAll('.splash-logo');
@@ -220,7 +205,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63548" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50612" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
