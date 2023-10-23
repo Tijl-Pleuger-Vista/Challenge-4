@@ -10,7 +10,7 @@
   --divider: #21262d;
   --sub-divider: #21262D;
   --text: white;
-  --sub-text: #8b949e;
+  --sub-text: #dddddd;
   --click-text: #58a6ff;
   --button: #1f6feb;
   --oreo: #5c509f;
@@ -134,6 +134,10 @@ strong {
   margin-left: 150px;
   position: relative;
   top: -40px;
+}
+
+.sub  {
+  color: var(--sub-text);
 }
 
 /* boxes */
@@ -549,4 +553,30 @@ strong {
   h5 {
     font-size: 80%;
   }
+}
+
+body::-webkit-scrollbar {
+  width: 6px;               /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--divider);        /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: white;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 6px;               /* width of the entire scrollbar */
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: none;        /* color of the tracking area */
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: white;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
 }
