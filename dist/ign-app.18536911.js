@@ -140,14 +140,19 @@ var GetGitRepo = function GetGitRepo() {
       var resultCategories = splitCategories.pop();
       var newReducedCategories = splitCategories.join("/");
       localStorage.setItem('reducedList', newReducedCategories);
-      console.log(_reducedCategories);
+      // console.log(_reducedCategories)
+
       fetch("https://api.github.com/repos/".concat(gitUser, "/").concat(resultCategories, "/commits/main")).then(function (subCategories) {
         return subCategories.json();
       }).then(function (subCategories) {
         console.log(subCategories);
+        fetch("https://raw.githubusercontent.com/HeadBodyScript/headbodyscript.github.io/main/README.md").text();
+        README0.innerHTML = t;
         var gitTime = subCategories.commit.author.date;
+        var gitName = subCategories.commit.author.name;
         var gitSummary = subCategories.commit.message;
-        Form.innerHTML += "\n                <div class=\"card\">\n                    <div class=\"card-container\">\n                        <ul>\n                            <li class=\"card-header\"><strong>Project Name</strong><img class=\"icon\" src=\"icon.jpeg\" alt=\"\"></li>\n                            <li class=\"border\"><i class=\"bi bi-caret-right-fill\"></i>Description</li>\n                            <li class=\"border\"><i class=\"bi bi-caret-right-fill\"></i>ReadMe.MD</li>\n                            <li class=\"border\"><i class=\"bi bi-caret-down-fill\"></i>New Update</li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>Time: ".concat(gitTime, "</li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>New Update</li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>Message: ").concat(gitSummary, "</li>\n                            <li class=\"border card-footer\"><i class=\"bi bi-caret-right-fill\"></i><a href=\"\">Link To Website</a></li>\n                        </ul>\n                    </div>\n                </div>\n                ");
+        var gitIcon = subCategories.committer.avatar_url;
+        Form.innerHTML += "\n                <div class=\"card\">\n                    <div class=\"card-container\">\n                        <ul>\n                            <li class=\"card-header\"><strong>".concat(resultCategories, "</strong><img class=\"icon\" src=\"icon.jpeg\" alt=\"\"></li>\n                            <li class=\"border\"><i class=\"bi bi-caret-right-fill\"></i>Description</li>\n                            <li class=\"border sub\"><i class=\"bi bi-dot\"></i>This is some text that makes up the description of the given challenge</li>\n                            <li class=\"border\"><i class=\"bi bi-caret-right-fill\"></i>ReadMe.MD</li>\n                            <li class=\"border readme scrollbar sub\"><i class=\"bi bi-dot\"></i>").concat(t, "</li>\n                            <li class=\"border\"><i class=\"bi bi-caret-down-fill\"></i>New Update</li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>Date: ").concat(gitTime, "</li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>By: ").concat(gitName, "<img class=\"icon\" src=\"").concat(gitIcon, "\" alt=\"\"></li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>Note: ").concat(gitSummary, "</li>\n                            <li class=\"border card-footer\"><i class=\"bi bi-link\"></i><a style=\"color: blueviolet;\" class=\"link\" href=\"https://github.com/").concat(gitUser, "/").concat(resultCategories, "\">Visit the repository</a></li>\n                        </ul>\n                    </div>\n                </div>\n                ");
       });
     }
     var result = 0;
@@ -205,7 +210,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50593" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57714" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
