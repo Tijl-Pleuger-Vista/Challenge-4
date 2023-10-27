@@ -146,15 +146,18 @@ var GetGitRepo = function GetGitRepo() {
         return subCategories.json();
       }).then(function (subCategories) {
         console.log(subCategories);
-        fetch("https://raw.githubusercontent.com/HeadBodyScript/headbodyscript.github.io/main/README.md").text();
-        README0.innerHTML = t;
+
+        // fetch("https://raw.githubusercontent.com/HeadBodyScript/headbodyscript.github.io/main/README.md").text();README0.innerHTML=t
+
         var gitTime = subCategories.commit.author.date;
         var gitName = subCategories.commit.author.name;
         var gitSummary = subCategories.commit.message;
         var gitIcon = subCategories.committer.avatar_url;
-        Form.innerHTML += "\n                <div class=\"card\">\n                    <div class=\"card-container\">\n                        <ul>\n                            <li class=\"card-header\"><strong>".concat(resultCategories, "</strong><img class=\"icon\" src=\"icon.jpeg\" alt=\"\"></li>\n                            <li class=\"border\"><i class=\"bi bi-caret-right-fill\"></i>Description</li>\n                            <li class=\"border sub\"><i class=\"bi bi-dot\"></i>This is some text that makes up the description of the given challenge</li>\n                            <li class=\"border\"><i class=\"bi bi-caret-right-fill\"></i>ReadMe.MD</li>\n                            <li class=\"border readme scrollbar sub\"><i class=\"bi bi-dot\"></i>").concat(t, "</li>\n                            <li class=\"border\"><i class=\"bi bi-caret-down-fill\"></i>New Update</li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>Date: ").concat(gitTime, "</li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>By: ").concat(gitName, "<img class=\"icon\" src=\"").concat(gitIcon, "\" alt=\"\"></li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>Note: ").concat(gitSummary, "</li>\n                            <li class=\"border card-footer\"><i class=\"bi bi-link\"></i><a style=\"color: blueviolet;\" class=\"link\" href=\"https://github.com/").concat(gitUser, "/").concat(resultCategories, "\">Visit the repository</a></li>\n                        </ul>\n                    </div>\n                </div>\n                ");
+        Form.innerHTML += "\n                <div class=\"card\">\n                    <div class=\"card-container\">\n                        <ul>\n                            <li class=\"card-header\"><strong>".concat(resultCategories, "</strong><img class=\"icon\" src=\"icon.jpeg\" alt=\"\"></li>\n                            <li class=\"border\"><i class=\"bi bi-caret-right-fill\"></i>Description</li>\n                            <li class=\"border sub\"><i class=\"bi bi-dot\"></i>This is some text that makes up the description of the given challenge</li>\n                            <li class=\"border\"><i class=\"bi bi-caret-right-fill\"></i>ReadMe.MD</li>\n                            <li class=\"border\"><i class=\"bi bi-caret-down-fill\"></i>New Update</li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>Date: ").concat(gitTime, "</li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>By: ").concat(gitName, "<img class=\"icon\" src=\"").concat(gitIcon, "\" alt=\"\"></li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>Note: ").concat(gitSummary, "</li>\n                            <li class=\"border card-footer\"><i class=\"bi bi-link\"></i><a style=\"color: blueviolet;\" class=\"link\" href=\"https://github.com/").concat(gitUser, "/").concat(resultCategories, "\">Visit the repository</a></li>\n                        </ul>\n                    </div>\n                </div>\n                ");
+        // <li class="border readme scrollbar sub"><i class="bi bi-dot"></i>${t}</li>
       });
     }
+
     var result = 0;
     for (var i = 0; i < Categories.length; i++) {
       result += placeDiv();
@@ -210,7 +213,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57714" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62632" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

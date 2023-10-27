@@ -43,7 +43,6 @@ let GetGitRepo = () => {
                             <li class="border"><i class="bi bi-caret-right-fill"></i>Description</li>
                             <li class="border sub"><i class="bi bi-dot"></i>This is some text that makes up the description of the given challenge</li>
                             <li class="border"><i class="bi bi-caret-right-fill"></i>ReadMe.MD</li>
-                            <li class="border readme scrollbar sub"><i class="bi bi-dot"></i>${t}</li>
                             <li class="border"><i class="bi bi-caret-down-fill"></i>New Update</li>
                             <li class="border"><i class="bi bi-dot"></i>Date: ${gitTime}</li>
                             <li class="border"><i class="bi bi-dot"></i>By: ${gitName}<img class="icon" src="${gitIcon}" alt=""></li>
@@ -53,6 +52,7 @@ let GetGitRepo = () => {
                     </div>
                 </div>
                 `
+// <li class="border readme scrollbar sub"><i class="bi bi-dot"></i>${t}</li>
                 })
             }
 
