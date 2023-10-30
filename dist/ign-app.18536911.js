@@ -133,13 +133,35 @@ var GetGitRepo = function GetGitRepo() {
     var reducedCategories = Categories.reduce(function (prev, obj) {
       return prev + "/".concat(obj.name);
     }, '');
-    localStorage.setItem('reducedList', reducedCategories);
+    localStorage.setItem('reducedName', reducedCategories);
+    var reducedDescription = Categories.reduce(function (prev, obj) {
+      return prev + "/".concat(obj.description);
+    }, '');
+    localStorage.setItem('reducedDescription', reducedDescription);
     function placeDiv() {
-      var _reducedCategories = localStorage.getItem('reducedList');
+      var _reducedCategories = localStorage.getItem('reducedName');
       var splitCategories = _reducedCategories.split("/");
       var resultCategories = splitCategories.pop();
       var newReducedCategories = splitCategories.join("/");
-      localStorage.setItem('reducedList', newReducedCategories);
+      localStorage.setItem('reducedName', newReducedCategories);
+      var reducedDescription = localStorage.getItem('reducedDescription');
+      var splitDescription = reducedDescription.split("/");
+      var resultDescription = splitDescription.pop();
+      var newReducedDescription = splitDescription.join("/");
+      localStorage.setItem('reducedDescription', newReducedDescription);
+
+      // fetch("https://raw.githubusercontent.com/HeadBodyScript/headbodyscript.github.io/main/README.md")
+      //     .then(ReadMe => ReadMe.text())
+
+      var ReadMe;
+      fetch("https://raw.githubusercontent.com/".concat(gitUser, "/").concat(resultCategories, "/main/README.md")).then(function (res) {
+        return res.text();
+      }).then(function (data) {
+        ReadMe = data;
+      }).then(function () {
+        console.log(ReadMe);
+      });
+
       // console.log(_reducedCategories)
 
       fetch("https://api.github.com/repos/".concat(gitUser, "/").concat(resultCategories, "/commits/main")).then(function (subCategories) {
@@ -153,11 +175,9 @@ var GetGitRepo = function GetGitRepo() {
         var gitName = subCategories.commit.author.name;
         var gitSummary = subCategories.commit.message;
         var gitIcon = subCategories.committer.avatar_url;
-        Form.innerHTML += "\n                <div class=\"card\">\n                    <div class=\"card-container\">\n                        <ul>\n                            <li class=\"card-header\"><strong>".concat(resultCategories, "</strong><img class=\"icon\" src=\"icon.jpeg\" alt=\"\"></li>\n                            <li class=\"border\"><i class=\"bi bi-caret-right-fill\"></i>Description</li>\n                            <li class=\"border sub\"><i class=\"bi bi-dot\"></i>This is some text that makes up the description of the given challenge</li>\n                            <li class=\"border\"><i class=\"bi bi-caret-right-fill\"></i>ReadMe.MD</li>\n                            <li class=\"border\"><i class=\"bi bi-caret-down-fill\"></i>New Update</li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>Date: ").concat(gitTime, "</li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>By: ").concat(gitName, "<img class=\"icon\" src=\"").concat(gitIcon, "\" alt=\"\"></li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>Note: ").concat(gitSummary, "</li>\n                            <li class=\"border card-footer\"><i class=\"bi bi-link\"></i><a style=\"color: blueviolet;\" class=\"link\" href=\"https://github.com/").concat(gitUser, "/").concat(resultCategories, "\">Visit the repository</a></li>\n                        </ul>\n                    </div>\n                </div>\n                ");
-        // <li class="border readme scrollbar sub"><i class="bi bi-dot"></i>${t}</li>
+        Form.innerHTML += "\n                <div class=\"card\">\n                    <div class=\"card-container\">\n                        <ul>\n                            <li class=\"card-header\"><strong>".concat(resultCategories, "</strong><img class=\"icon\" src=\"icon.jpeg\" alt=\"\"></li>\n                            <li class=\"border\"><i class=\"bi bi-caret-right-fill\"></i>Description</li>\n                            <li class=\"border sub\"><i class=\"bi bi-dot\"></i>").concat(resultDescription, "</li>\n                            <li class=\"border\"><i class=\"bi bi-caret-right-fill\"></i>ReadMe.MD</li>\n                            <li class=\"border readme scrollbar sub\"><i class=\"bi bi-dot\"></i>").concat(ReadMe, "</li>\n                            <li class=\"border\"><i class=\"bi bi-caret-right-fill\"></i>Latest Update</li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>Date: ").concat(gitTime, "</li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>By: ").concat(gitName, "<img class=\"icon\" src=\"").concat(gitIcon, "\" alt=\"\"></li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>Note: ").concat(gitSummary, "</li>\n                            <li class=\"border card-footer\"><i class=\"bi bi-link\"></i><a style=\"color: blueviolet;\" class=\"link\" href=\"https://github.com/").concat(gitUser, "/").concat(resultCategories, "\">Visit the repository</a></li>\n                        </ul>\n                    </div>\n                </div>\n                ");
       });
     }
-
     var result = 0;
     for (var i = 0; i < Categories.length; i++) {
       result += placeDiv();
@@ -213,7 +233,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62632" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60333" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
