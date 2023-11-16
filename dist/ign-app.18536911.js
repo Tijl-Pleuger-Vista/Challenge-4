@@ -119,92 +119,66 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   return newRequire;
 })({"assets/js/ign-app.js":[function(require,module,exports) {
 var GetGitRepo = function GetGitRepo() {
-  var gitUser = "Tijl-Pleuger-Vista";
-  var GitRepoLink = "/repos/HeadBodyScript/DATA-Armoury/commits";
-  fetch("https://api.github.com/users/".concat(gitUser, "/repos")).then(function (Categories) {
-    return Categories.json();
-  }).then(function (Categories) {
-    console.log(Categories);
-
-    // (dont) make this so there are arrays of the obj you need to use in the placeDiv function
-
-    // make a for each loop of Categories to make var of data I need inside the function
-    // Categories 0, create own list at 0. At List[0] get data from Categories[0] and so on
-    var reducedCategories = Categories.reduce(function (prev, obj) {
-      return prev + "/".concat(obj.name);
-    }, '');
-    localStorage.setItem('reducedName', reducedCategories);
-    var reducedDescription = Categories.reduce(function (prev, obj) {
-      return prev + "/".concat(obj.description);
-    }, '');
-    localStorage.setItem('reducedDescription', reducedDescription);
-    function placeDiv() {
-      var _reducedCategories = localStorage.getItem('reducedName');
-      var splitCategories = _reducedCategories.split("/");
-      var resultCategories = splitCategories.pop();
-      var newReducedCategories = splitCategories.join("/");
-      localStorage.setItem('reducedName', newReducedCategories);
-      var reducedDescription = localStorage.getItem('reducedDescription');
-      var splitDescription = reducedDescription.split("/");
-      var resultDescription = splitDescription.pop();
-      var newReducedDescription = splitDescription.join("/");
-      localStorage.setItem('reducedDescription', newReducedDescription);
-
-      // fetch("https://raw.githubusercontent.com/HeadBodyScript/headbodyscript.github.io/main/README.md")
-      //     .then(ReadMe => ReadMe.text())
-
-      var ReadMe;
-      fetch("https://raw.githubusercontent.com/".concat(gitUser, "/").concat(resultCategories, "/main/README.md")).then(function (res) {
-        return res.text();
-      }).then(function (data) {
-        ReadMe = data;
-      }).then(function () {
-        console.log(ReadMe);
-      });
-
-      // console.log(_reducedCategories)
-
-      fetch("https://api.github.com/repos/".concat(gitUser, "/").concat(resultCategories, "/commits/main")).then(function (subCategories) {
-        return subCategories.json();
-      }).then(function (subCategories) {
-        console.log(subCategories);
-
-        // fetch("https://raw.githubusercontent.com/HeadBodyScript/headbodyscript.github.io/main/README.md").text();README0.innerHTML=t
-
-        var gitTime = subCategories.commit.author.date;
-        var gitName = subCategories.commit.author.name;
-        var gitSummary = subCategories.commit.message;
-        var gitIcon = subCategories.committer.avatar_url;
-        Form.innerHTML += "\n                <div class=\"card\">\n                    <div class=\"card-container\">\n                        <ul>\n                            <li class=\"card-header\"><strong>".concat(resultCategories, "</strong><img class=\"icon\" src=\"icon.jpeg\" alt=\"\"></li>\n                            <li class=\"border\"><i class=\"bi bi-caret-right-fill\"></i>Description</li>\n                            <li class=\"border sub\"><i class=\"bi bi-dot\"></i>").concat(resultDescription, "</li>\n                            <li class=\"border\"><i class=\"bi bi-caret-right-fill\"></i>ReadMe.MD</li>\n                            <li class=\"border readme scrollbar sub\"><i class=\"bi bi-dot\"></i>").concat(ReadMe, "</li>\n                            <li class=\"border\"><i class=\"bi bi-caret-right-fill\"></i>Latest Update</li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>Date: ").concat(gitTime, "</li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>By: ").concat(gitName, "<img class=\"icon\" src=\"").concat(gitIcon, "\" alt=\"\"></li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>Note: ").concat(gitSummary, "</li>\n                            <li class=\"border card-footer\"><i class=\"bi bi-link\"></i><a style=\"color: blueviolet;\" class=\"link\" href=\"https://github.com/").concat(gitUser, "/").concat(resultCategories, "\">Visit the repository</a></li>\n                        </ul>\n                    </div>\n                </div>\n                ");
+  var i = "Tijl-Pleuger-Vista",
+    e = "/repos/HeadBodyScript/DATA-Armoury/commits";
+  fetch("https://api.github.com/users/".concat(i, "/repos")).then(function (i) {
+    return i.json();
+  }).then(function (e) {
+    console.log(e);
+    var t = e.reduce(function (i, e) {
+      return i + "/".concat(e.name);
+    }, "");
+    localStorage.setItem("reducedName", t);
+    var s = e.reduce(function (i, e) {
+      return i + "/".concat(e.description);
+    }, "");
+    function l() {
+      var e,
+        t = localStorage.getItem("reducedName").split("/"),
+        s = t.pop(),
+        l = t.join("/");
+      localStorage.setItem("reducedName", l);
+      var r = localStorage.getItem("reducedDescription").split("/"),
+        o = r.pop(),
+        a = r.join("/");
+      localStorage.setItem("reducedDescription", a), fetch("https://raw.githubusercontent.com/".concat(i, "/").concat(s, "/main/README.md")).then(function (i) {
+        return i.text();
+      }).then(function (i) {
+        e = i;
+      }), fetch("https://api.github.com/repos/".concat(i, "/").concat(s, "/commits/main")).then(function (i) {
+        return i.json();
+      }).then(function (t) {
+        console.log(t);
+        var l = t.commit.author.date,
+          r = t.commit.author.name,
+          a = t.commit.message,
+          c = t.committer.avatar_url;
+        Form.innerHTML += "\n                <div class=\"card\">\n                    <div class=\"card-container\">\n                        <ul>\n                            <li class=\"card-header\"><strong>".concat(s, "</strong><img class=\"icon\" src=\"icon.jpeg\" alt=\"\"></li>\n                            <li class=\"border\"><i class=\"bi bi-caret-right-fill\"></i>Description</li>\n                            <li class=\"border sub\"><i class=\"bi bi-dot\"></i>").concat(o, "</li>\n                            <li class=\"border\"><i class=\"bi bi-caret-right-fill\"></i>ReadMe.MD</li>\n                            <li class=\"border readme scrollbar sub\"><i class=\"bi bi-dot\"></i>").concat(e, "</li>\n                            <li class=\"border\"><i class=\"bi bi-caret-right-fill\"></i>Latest Update</li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>Date: ").concat(l, "</li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>By: ").concat(r, "<img class=\"icon\" src=\"").concat(c, "\" alt=\"\"></li>\n                            <li class=\"border\"><i class=\"bi bi-dot\"></i>Note: ").concat(a, "</li>\n                            <li class=\"border card-footer\"><i class=\"bi bi-link\"></i><a style=\"color: blueviolet;\" class=\"link\" href=\"https://github.com/").concat(i, "/").concat(s, "\">Visit the repository</a></li>\n                        </ul>\n                    </div>\n                </div>\n                ");
       });
     }
-    var result = 0;
-    for (var i = 0; i < Categories.length; i++) {
-      result += placeDiv();
-    }
+    localStorage.setItem("reducedDescription", s);
+    var r = 0;
+    for (var o = 0; o < e.length; o++) r += l();
   });
 };
 GetGitRepo();
-var intro = document.querySelector('.splash-intro');
-var logo = document.querySelector('.splash-logo-header');
-var logoSpan = document.querySelectorAll('.splash-logo');
-window.addEventListener('DOMContentLoaded', function () {
+var intro = document.querySelector(".splash-intro"),
+  logo = document.querySelector(".splash-logo-header"),
+  logoSpan = document.querySelectorAll(".splash-logo");
+window.addEventListener("DOMContentLoaded", function () {
   setTimeout(function () {
-    logoSpan.forEach(function (span, idx) {
+    logoSpan.forEach(function (i, e) {
       setTimeout(function () {
-        span.classList.add('active');
-      }, (idx + 1) * 400);
-    });
-    setTimeout(function () {
-      logoSpan.forEach(function (span, idx) {
+        i.classList.add("active");
+      }, (e + 1) * 400);
+    }), setTimeout(function () {
+      logoSpan.forEach(function (i, e) {
         setTimeout(function () {
-          span.classList.remove('active');
-          span.classList.add('fade');
-        }, (idx + 1) * 50);
+          i.classList.remove("active"), i.classList.add("fade");
+        }, (e + 1) * 50);
       });
-    }, 2000);
-    setTimeout(function () {
-      intro.style.top = '-100vh';
+    }, 2e3), setTimeout(function () {
+      intro.style.top = "-100vh";
     }, 2300);
   });
 });
